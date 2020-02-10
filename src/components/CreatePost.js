@@ -1,15 +1,18 @@
 import React from 'react';
+import uuid from 'react-uuid';
 
-function CreatePost({ user, posts, setPosts }) {
+import { PostContext } from '../App';
+
+function CreatePost({ user }) {
+    const { dispatch } = React.useContext(PostContext);
     const [content, setContent] = React.useState('');
     const [image, setImage] = React.useState(null);
     const imageInputRef = React.useRef();
 
     function handleSubmit(event) {
         event.preventDefault();
-        const post = { content, image, user };
-        const newPosts = [post, ...posts];
-        setPosts(newPosts);
+        const post = { content, image, user, id: uuid() };
+        dispatch({ type: 'ADD_POST', payload: { post }})
         setContent('');
         imageInputRef.current.value = '';
     }

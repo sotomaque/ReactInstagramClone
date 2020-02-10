@@ -1,21 +1,8 @@
 import React from 'react';
+import Post from './Post';
 
-function PostList({posts, user}) {
-    return (
-       posts.map( (post, index) => (
-            <React.Fragment key={index}>  
-                {post.image && (
-                    <img 
-                        src={URL.createObjectURL(post.image)}
-                        style={{height: 100, width: 200, objectFit: 'conver'}}
-                        alt="Post Cover"
-                    />      
-                )}
-                <p>{post.content}</p>
-                <div>{user}</div>
-            </React.Fragment>
-        ))
-    )
+function PostList({ posts }) {
+    return posts.map( post => (<Post key={post.id} {...post} /> ))
 }
 
 export default PostList; 
